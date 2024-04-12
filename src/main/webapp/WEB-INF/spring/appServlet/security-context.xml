@@ -19,15 +19,19 @@
     </security:authentication-manager>
 
     <security:http auto-config="true" use-expressions="true">
-        <security:intercept-url pattern="/" access="permitAll()"/>
-        <security:intercept-url pattern="/login" access="permitAll()"/>
-        <security:intercept-url pattern="/offers" access="permitAll()"/>
-        <security:intercept-url pattern="/createoffer" access="hasRole('ROLE_USER')"/>
-        <security:intercept-url pattern="/docreate" access="hasRole('ROLE_USER')"/>
-        <security:intercept-url pattern="/resources/**" access="permitAll()"/>
-        <security:intercept-url pattern="/**" access="denyAll()"/>
+        <security:intercept-url pattern="/" access="permitAll()"/>  <!-- if -->
+        <security:intercept-url pattern="/login" access="permitAll()"/> <!-- else if -->
+        <security:intercept-url pattern="/offers" access="permitAll()"/>    <!-- else if -->
 
-        <security:form-login login-page="/login"/>
+<!--        아래 ROLE_USER 권한을 가진 Client만 접근 가능-->
+        <security:intercept-url pattern="/createoffer" access="hasRole('ROLE_USER')"/>  <!-- else if -->
+        <security:intercept-url pattern="/docreate" access="hasRole('ROLE_USER')"/>     <!-- else if -->
+<!--        <security:intercept-url pattern="/createoffer" access="permitAll()"/>-->
+<!--        <security:intercept-url pattern="/docreate" access="permitAll()"/>-->
+        <security:intercept-url pattern="/resources/**" access="permitAll()"/>  <!-- else if -->  <!-- /resource/** : /resources 밑의 모든 파일 허용(css 등)-->
+        <security:intercept-url pattern="/**" access="denyAll()"/>  <!--위에서 명시하지 않은 나머지 파일들에 대한 접근은 모두 deny -->
+
+        <security:form-login login-page="/login"/>   <!-- custom login form을 쓰겠다!!!!!!!-->
         <security:logout/>
     </security:http>
 </beans>

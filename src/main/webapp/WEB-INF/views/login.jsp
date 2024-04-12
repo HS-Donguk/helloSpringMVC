@@ -20,15 +20,16 @@
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
 </head>
 <body>
+<%--html form태그를 사용하면 csrf 토큰을 명히새줘야 한다.--%>
 <div class="container">
-    <form class="form-signin" method="post" action="<c:url value="/login" />">
+    <form class="form-signin" method="post" action="<c:url value="/login" />">   <!-- button이 눌리면 action -->
         <h2 class="form-signin-heading">Please sign in</h2>
 
-        <c:if test="${not empty errorMsg}">
+        <c:if test="${not empty errorMsg}">  <!-- attribute name : errorMsg(LoginController내의 Model에 추가한 name과 같아야 한다. -->
             <div style="color: #ff0000;"> <h3> ${errorMsg} </h3></div>
         </c:if>
 
-        <c:if test="${not empty logoutMsg}">
+        <c:if test="${not empty logoutMsg}">  <!-- attribute name : logoutMsg(LoginController내의 Model에 추가한 name과 같아야 한다. -->
             <div style="color: #0000ff;" > <h3> ${logoutMsg} </h3></div>
         </c:if>
 
@@ -40,7 +41,7 @@
             <label for="password" class="sr-only">Password</label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
         </p>
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  />
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"  />   <!-- cwrd 공격을 예방하기 위한 페이지 전송시 토큰도 전달하기 위함. -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
 </div>

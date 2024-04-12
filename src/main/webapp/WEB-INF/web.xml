@@ -36,7 +36,7 @@
         <servlet-name>appServlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
+    <!--    client로 부터 들어오는 데이터를 강제로 UTF-8로 encoding시킴-->
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>
@@ -60,6 +60,8 @@
     </filter-mapping>
 
 
+
+    <!-- DelicatingFilterProxy 등록 : 모든 request를 가로채겠다.    -->
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

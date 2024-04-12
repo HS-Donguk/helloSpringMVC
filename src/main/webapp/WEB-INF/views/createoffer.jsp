@@ -15,7 +15,7 @@
           href="${pageContext.request.contextPath}/resources/css/main.css" >
 
 </head>
-<body>
+<body>   <!--spring form 태그를 사용하면 csrf토큰이 알아서 날아간다 -->
 <sf:form method="post" action="${pageContext.request.contextPath}/docreate" modelAttribute="offer">
     <table class="formtable">
         <tr>
